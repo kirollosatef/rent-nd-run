@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start:clint" : "cd client && npm start",
-    "start:server" : "cd server && npm start",
+    "start:server" : "cd server && php artisan serve",
     "start" : "npm run start:clint & npm run start:server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
