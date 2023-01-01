@@ -13,15 +13,9 @@ return new class extends Migration
    */
   public function up()
   {
-    Schema::create('users', function (Blueprint $table) {
+    Schema::create('roles', function (Blueprint $table) {
       $table->id();
-      $table->string('name');
-      $table->string('email');
-      $table->string('password');
-      $table->string('image');
-      $table->string('phone_number');
-      $table->boolean('approved')->default(0);
-      $table->unsignedBigInteger('role_id');
+      $table->enum('name', ['customer', 'vendor', 'delivery', 'askingToBeVendor', 'askingToBeDelivery', 'admin']);
       $table->timestamps();
     });
   }
@@ -34,7 +28,7 @@ return new class extends Migration
   public function down()
   {
     Schema::disableForeignKeyConstraints();
-    Schema::dropIfExists('users');
+    Schema::dropIfExists('roles');
     Schema::enableForeignKeyConstraints();
   }
 };
