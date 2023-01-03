@@ -15,6 +15,7 @@ function Home() {
       <Navbar />
       <Routes>
         <Route path="/home" element={<HomePage/>} />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/profile" element={<Profile/>} />
         {/* <Route path={`profile/${userID}`} element={<Profile/>} /> */}
         <Route path="/card" element={<Card/>} />

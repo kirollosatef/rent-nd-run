@@ -15,9 +15,6 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   solid,
-  regular,
-  brands,
-  icon,
 } from "@fortawesome/fontawesome-svg-core/import.macro";
 import "../css/LogIn.css"
 import { BsFacebook } from "react-icons/bs";
@@ -40,7 +37,6 @@ function LogIn() {
 
   return (
     <div className="loginPage">
-			<div className="back"></div>
       <MDBContainer className="p-3 my-5 d-flex flex-column w-50 loginPage card m-t-100">
         <h1 class="text-center">
           rent and run{" "}
