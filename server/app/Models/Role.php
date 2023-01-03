@@ -7,5 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    use HasFactory;
+  use HasFactory;
+
+  protected $fillable = ['name'];
+
+  /**
+   * Get the user that owns the role.
+   */
+
+  public function user()
+  {
+    return $this->hasOne('App\User');
+  }
 }

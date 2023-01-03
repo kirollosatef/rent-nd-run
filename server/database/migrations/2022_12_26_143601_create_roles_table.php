@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -15,9 +17,20 @@ return new class extends Migration
   {
     Schema::create('roles', function (Blueprint $table) {
       $table->id();
-      $table->enum('name', ['customer', 'vendor', 'delivery', 'askingToBeVendor', 'askingToBeDelivery', 'admin']);
+      $table->string('name');
       $table->timestamps();
     });
+    // insert some roles : ['customer', 'vendor', 'delivery', 'askingToBeVendor', 'askingToBeDelivery', 'admin']
+    DB::table('roles')->insert(
+      [
+        ['name' => 'customer'],
+        ['name' => 'vendor'],
+        ['name' => 'delivery'],
+        ['name' => 'askingToBeVendor'],
+        ['name' => 'askingToBeDelivery'],
+        ['name' => 'admin'],
+      ]
+    );
   }
 
   /**
