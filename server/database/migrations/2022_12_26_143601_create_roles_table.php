@@ -1,7 +1,9 @@
 <?php
 
+use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,17 +15,22 @@ return new class extends Migration
    */
   public function up()
   {
-    Schema::create('users', function (Blueprint $table) {
+    Schema::create('roles', function (Blueprint $table) {
       $table->id();
       $table->string('name');
-      $table->string('email');
-      $table->string('password');
-      $table->string('image');
-      $table->string('phone_number');
-      $table->boolean('approved')->default(0);
-      $table->unsignedBigInteger('role_id');
       $table->timestamps();
     });
+    // insert some roles : ['customer', 'vendor', 'delivery', 'askingToBeVendor', 'askingToBeDelivery', 'admin']
+    DB::table('roles')->insert(
+      [
+        ['name' => 'customer'],
+        ['name' => 'vendor'],
+        ['name' => 'delivery'],
+        ['name' => 'askingToBeVendor'],
+        ['name' => 'askingToBeDelivery'],
+        ['name' => 'admin'],
+      ]
+    );
   }
 
   /**
@@ -34,7 +41,7 @@ return new class extends Migration
   public function down()
   {
     Schema::disableForeignKeyConstraints();
-    Schema::dropIfExists('users');
+    Schema::dropIfExists('roles');
     Schema::enableForeignKeyConstraints();
   }
 };

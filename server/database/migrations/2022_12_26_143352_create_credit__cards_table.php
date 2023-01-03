@@ -13,15 +13,13 @@ return new class extends Migration
    */
   public function up()
   {
-    Schema::create('users', function (Blueprint $table) {
+    Schema::create('credit__cards', function (Blueprint $table) {
       $table->id();
       $table->string('name');
-      $table->string('email');
-      $table->string('password');
-      $table->string('image');
-      $table->string('phone_number');
-      $table->boolean('approved')->default(0);
-      $table->unsignedBigInteger('role_id');
+      $table->unsignedBigInteger('user_id');
+      $table->string('cc_number');
+      $table->date('expiration_date');
+      $table->integer('cvv');
       $table->timestamps();
     });
   }
@@ -34,7 +32,7 @@ return new class extends Migration
   public function down()
   {
     Schema::disableForeignKeyConstraints();
-    Schema::dropIfExists('users');
+    Schema::dropIfExists('credit__cards');
     Schema::enableForeignKeyConstraints();
   }
 };
