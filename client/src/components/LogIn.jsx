@@ -1,93 +1,241 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import "../css/SingUp_LogIn.css";
-import "../css/Utils.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import React, { useState } from "react";
+import {
+  MDBContainer,
+  MDBTabs,
+  MDBTabsItem,
+  MDBTabsLink,
+  MDBTabsContent,
+  MDBTabsPane,
+  MDBBtn,
+  MDBIcon,
+  MDBInput,
+  MDBCheckbox,
+} from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  solid
+  solid,
 } from "@fortawesome/fontawesome-svg-core/import.macro";
+import "../css/LogIn.css"
+import { BsFacebook } from "react-icons/bs";
+import { AiFillApple, AiFillGithub } from "react-icons/ai";
+import { GrGoogle } from "react-icons/gr";
 
-function LogIN() {
+
+function LogIn() {
+  const [justifyActive, setJustifyActive] = useState("tab1");
+
+  const handleJustifyClick = (value) => {
+    if (value === justifyActive) {
+      return;
+    }
+
+    setJustifyActive(value);
+  };
+
   const Navigate = useNavigate();
+
   return (
-    <div>
-      <div className="limiter">
-        <div className="container-login100">
-          <div className="wrap-login100">
-            <form className="login100-form validate-form">
-              <span id="rentNrun">Rent Nd Run</span>
-              <span className="login100-form-title p-b-34 p-t-27">Log in</span>
+    <div className="loginPage">
+      <MDBContainer className="p-3 my-5 d-flex flex-column w-50 loginPage card m-t-100">
+        <h1 class="text-center">
+          rent and run{" "}
+          <FontAwesomeIcon icon={solid("running")} className="text-info" />
+        </h1>
+
+        <MDBTabs
+          pills
+          justify
+          className="mb-3 d-flex flex-row justify-content-between"
+        >
+          <MDBTabsItem>
+            <MDBTabsLink
+              onClick={() => handleJustifyClick("tab1")}
+              active={justifyActive === "tab1"}
+            >
+              Login
+            </MDBTabsLink>
+          </MDBTabsItem>
+          <MDBTabsItem>
+            <MDBTabsLink
+              onClick={() => handleJustifyClick("tab2")}
+              active={justifyActive === "tab2"}
+            >
+              Register
+            </MDBTabsLink>
+          </MDBTabsItem>
+        </MDBTabs>
+
+        <MDBTabsContent>
+          <MDBTabsPane show={justifyActive === "tab1"}>
+            <div className="text-center mb-3">
+              <p>Sign in with:</p>
+
               <div
-                className="wrap-input100 validate-input"
-                data-validate="Enter username"
-                style={{
-                  background: "linear-gradient(top, '#7579ff', '#b224ef')",
-                }}
+                className="d-flex justify-content-between mx-auto"
+                style={{ width: "40%" }}
               >
-                <input
-                  className="input100"
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                />
-                <span>
-                  <FontAwesomeIcon
-                    icon={solid("user")}
-                    style={{ color: "white" }}
-                    className="focus-input100"
-                  />
-                </span>
-              </div>
-              <div
-                className="wrap-input100 validate-input"
-                data-validate="Enter password"
-              >
-                <input
-                  className="input100"
-                  type="password"
-                  name="pass"
-                  placeholder="Password"
-                />
-                <FontAwesomeIcon
-                  icon={solid("lock")}
-                  style={{ color: "white" }}
-                  className="focus-input100"
-                />
-              </div>
-              <div className="contact100-form-checkbox">
-                <input
-                  className="input-checkbox100"
-                  id="ckb1"
-                  type="checkbox"
-                  name="remember-me"
-                />
-                <label className="label-checkbox100" htmlFor="ckb1">
-                  Remember me
-                </label>
-              </div>
-              <div className="container-login100-form-btn">
-                <button
-                  className="login100-form-btn"
-                  onClick={() => Navigate("/home")}
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
                 >
-                  Login
-                </button>
+                  <BsFacebook fontSize={20} />
+                </MDBBtn>
+
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
+                >
+                  <AiFillGithub fontSize={20} />
+                </MDBBtn>
+
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
+                >
+                  <GrGoogle fontSize={20} />
+                </MDBBtn>
+
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
+                >
+                  <AiFillApple fontSize={20}/>
+                </MDBBtn>
               </div>
-              <div className="signforget p-t-90">
-                <Link className="links" to="/forgatPassword">
-                  Forgot Password?
-                </Link>
-                <a className="links" href="./1index.html">
-                  Sign Up
-                </a>
+
+              <p className="text-center mt-3">or:</p>
+            </div>
+
+            <MDBInput
+              wrapperClass="mb-4"
+              label="Email address"
+              id="form1"
+              type="email"
+            />
+            <MDBInput
+              wrapperClass="mb-4"
+              label="Password"
+              id="form2"
+              type="password"
+            />
+
+            <div className="d-flex justify-content-between mx-4 mb-4">
+              <MDBCheckbox
+                name="flexCheck"
+                value=""
+                id="flexCheckDefault"
+                label="Remember me"
+              />
+              <a href="!#">Forgot password?</a>
+            </div>
+
+            <MDBBtn
+              className="mb-4 w-100 bg-info"
+              onClick={() => Navigate("/home")}
+            >
+              Sign in
+            </MDBBtn>
+            <p className="text-center">
+              Not a member? <a href="#!">Register</a>
+            </p>
+          </MDBTabsPane>
+
+          <MDBTabsPane show={justifyActive === "tab2"}>
+            <div className="text-center mb-3">
+              <p>Sign un with:</p>
+
+              <div
+                className="d-flex justify-content-between mx-auto"
+                style={{ width: "40%" }}
+              >
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
+                >
+                  <BsFacebook fontSize={20} />
+                </MDBBtn>
+
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
+                >
+                  <AiFillGithub fontSize={20} />
+                </MDBBtn>
+
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
+                >
+                  <GrGoogle fontSize={20} />
+                </MDBBtn>
+
+                <MDBBtn
+                  tag="a"
+                  color="none"
+                  className="m-1"
+                  style={{ color: "#1266f1" }}
+                >
+                  <AiFillApple fontSize={20}/>
+                </MDBBtn>
               </div>
-            </form>
-          </div>
-        </div>
-      </div>
+
+              <p className="text-center mt-3">or:</p>
+            </div>
+
+            <MDBInput wrapperClass="mb-4" label="Name" id="form1" type="text" />
+            <MDBInput
+              wrapperClass="mb-4"
+              label="Username"
+              id="form1"
+              type="text"
+            />
+            <MDBInput
+              wrapperClass="mb-4"
+              label="Email"
+              id="form1"
+              type="email"
+            />
+            <MDBInput
+              wrapperClass="mb-4"
+              label="Password"
+              id="form1"
+              type="password"
+            />
+
+            <div className="d-flex justify-content-center mb-4">
+              <MDBCheckbox
+                name="flexCheck"
+                id="flexCheckDefault"
+                label="I have read and agree to the terms"
+              />
+            </div>
+
+            <MDBBtn
+              className="mb-4 w-100 bg-info"
+              onClick={() => Navigate("/home")}
+            >
+              Sign up
+            </MDBBtn>
+          </MDBTabsPane>
+        </MDBTabsContent>
+      </MDBContainer>
     </div>
   );
 }
-export default LogIN;
+
+export default LogIn;

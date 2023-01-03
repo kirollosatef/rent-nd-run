@@ -1,12 +1,16 @@
-import "./App.css";
-import Home from "./components/Home";
-import LoginForm from "./components/LoginForm";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import RegistrationForm from "./components/RegistrationForm";
+import './App.css';
+import Home from './components/Home';
+import LogIn from './components/LogIn';
+import {useState} from 'react';
+import { Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
+      <Routes>
+        <Route path="login" element={<LogIn/>} />
+        <Route path="/*" element={<Home/>} />
+      </Routes>
     </div>
   );
 }
